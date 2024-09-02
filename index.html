@@ -7,6 +7,34 @@
 </head>
 <body>
     <!-- The iframe script as provided -->
-    <script src="https://static.creditsense.com.au/iframe/mlm-loader.js?aff=W6UJ43G5&mode=embedded" data-include-url-param="true" id="mlm-loader-1"></script>
+    <!-- <script src="https://static.creditsense.com.au/iframe/mlm-loader.js?aff=W6UJ43G5&mode=embedded" data-include-url-param="true" id="mlm-loader-1"></script> -->
+    <script>
+        // Function to get URL parameter
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Determine affiliate ID based on URL parameters
+        var affiliateID;
+        if (getUrlParameter('dev') === 'true') {
+            affiliateID = 'W6UJ43G5';
+        } else if (getUrlParameter('uat') === 'true') {
+            affiliateID = '2D8YQ8F3';
+        } else {
+            affiliateID = 'XV7E9V53';
+        }
+
+        // Create the script element with the correct affiliate ID
+        var script = document.createElement('script');
+        script.src = 'https://static.creditsense.com.au/iframe/mlm-loader.js?aff=' + affiliateID + '&mode=embedded';
+        script.setAttribute('data-include-url-param', 'true');
+        script.id = 'mlm-loader-1';
+
+        // Append the script to the body
+        document.body.appendChild(script);
+    </script>
 </body>
 </html>
